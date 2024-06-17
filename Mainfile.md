@@ -66,7 +66,7 @@ Choosing the correct database server depends greatly on your use case and practi
 <br>
 <br>
 
-# Installation & Setup
+# Installation & Setup for Linux
 
 ### System Requirements:
 - **Operating System**: Ubuntu 18.04 or later versions.
@@ -183,9 +183,9 @@ psql -U myuser -d mydatabase -h localhost
 # CRUD operations
 
 - ### Create Table
-The following SQL statement will create a table named `cars` in your PostgreSQL database:
+The following SQL statement will create a table named `bikes` in your PostgreSQL database:
  ```
- CREATE TABLE cars (
+ CREATE TABLE bikes (
   brand VARCHAR(255),
   model VARCHAR(255),
   year INT
@@ -194,7 +194,7 @@ The following SQL statement will create a table named `cars` in your PostgreSQL 
 - ### Display Table
 You can "display" the empty table you just created with another SQL statement:  
 ```
-SELECT * FROM cars;
+SELECT * FROM bikes;
 ```
 Which will give you this result:
 
@@ -208,111 +208,111 @@ We can use `DISTINCT` with select, so that we can getch unique values.
 - ### Insert Data
 To insert data into a table in PostgreSQL, we use the `INSERT INTO` statement.
 
-The following SQL statement will insert one row of data into the `cars` table.
+The following SQL statement will insert one row of data into the `bikes` table.
 ```
-INSERT INTO cars (brand, model, year)
-VALUES ('Ford', 'Mustang', 1964); 
+INSERT INTO bikes (brand, model, year)
+VALUES ('Suzuki', 'Intruder', 1964); 
 ```
 - ### Insert Multiple Rows 
 To insert multiple rows of data, we use the same `INSERT INTO` statement, but with multiple values:
 ```
-INSERT INTO cars (brand, model, year)
+INSERT INTO bikes (brand, model, year)
 VALUES
-  ('Volvo', 'p1800', 1968),
-  ('BMW', 'M1', 1978),
-  ('Toyota', 'Celica', 1975); 
+  ('Royal Enfield', 'Classic 350', 1968),
+  ('Honda', 'Unicorn', 1978),
+  ('TVS', 'Apache', 1975); 
 ```
 Now, if we display the table using `SELECT`, we'll get:
 
 ```
 brand  |  model  | year
 --------+---------+------
- Ford   | Mustang | 1964
- Volvo  | p1800   | 1968
- BMW    | M1      | 1978
- Toyota | Celica  | 1975
+ Suzuki   | Intruder | 1964
+ Royal Enfield  | Classic 350   | 1968
+ Honda    | Unicorn      | 1978
+ TVS | Apache  | 1975
 (4 rows)
 ```
 - ### Fetch Data
 To retrieve data from a data base, we use the `SELECT` statement.   
 By specifying the column names, we can choose which columns to select:
 ```
- SELECT brand, year FROM cars; 
+ SELECT brand, year FROM bikes; 
 ```
 Now, we'll get
 ```
 brand  | year
 --------+------
- Ford   | 1964
- Volvo  | 1968
- BMW    | 1978
- Toyota | 1975
+ Suzuki   | 1964
+ Royal Enfield  | 1968
+ Honda    | 1978
+ TVS | 1975
 (4 rows)
 ```
 Specify a `*` instead of the column names to select all columns:
 ```
- SELECT * FROM cars; 
+ SELECT * FROM bikes; 
  ```
 - ### Add Column
 
 The `ALTER TABLE` statement is used to **add, delete, or modify columns** in an existing table.  
-We want to add a column named color to our cars table.
+We want to add a column named color to our bikes table.
 ```
-ALTER TABLE cars
+ALTER TABLE bikes
 ADD color VARCHAR(255); 
 ```
 Now, if we see the table we'll get this:
 ```
  brand  |  model  | year | color
 --------+---------+------+-------
- Ford   | Mustang | 1964 |
- Volvo  | p1800   | 1968 |
- BMW    | M1      | 1978 |
- Toyota | Celica  | 1975 |
+ Suzuki   | Intruder | 1964 |
+ Royal Enfield  | Classic 350   | 1968 |
+ Honda    | Unicorn      | 1978 |
+ TVS | Apache  | 1975 |
 (4 rows)
 ```
-As you can see, the `cars` table now has a `color` column.  
+As you can see, the `bikes` table now has a `color` column.  
 <br>
-Now, if we want to change the data type of the year column of the cars table from INT to VARCHAR(4).
+Now, if we want to change the data type of the year column of the bikes table from INT to VARCHAR(4).
 ```
-ALTER TABLE cars
+ALTER TABLE bikes
 ALTER COLUMN year TYPE VARCHAR(4); 
 ```
 
 - ### Drop Column
 
 To remove a column from a table, we have to use the `ALTER TABLE` statement again as we already know that it is used to **add, delete, or modify columns** in an existing table.  
-Now, if we want to remove the column named color from the cars table, we'll use `DROP COLUMN` statement.
+Now, if we want to remove the column named color from the bikes table, we'll use `DROP COLUMN` statement.
 ```
-ALTER TABLE cars
+ALTER TABLE bikes
 DROP COLUMN color; 
 ```
 Now, the table will look like this again.
 ```
 brand  |  model  | year
 --------+---------+------
- Ford   | Mustang | 1964
- Volvo  | p1800   | 1968
- BMW    | M1      | 1978
- Toyota | Celica  | 1970
+ Suzuki   | Intruder | 1964
+ Royal Enfield  | Classic 350   | 1968
+ Honda    | Unicorn      | 1978
+ TVS | Apache  | 1970
 (4 rows)
 ```  
 - ### DELETE 
 The `DELETE` statement is used to delete existing records in a table.
 ```
-DELETE FROM cars
-WHERE brand = 'Volvo'; 
+DELETE FROM bikes
+WHERE brand = 'Royal Enfield'; 
 ```
 - ### DELETE All Records
 It is possible to delete all rows in a table without deleting the table. This means that the table structure, attributes, and indexes will be intact.  
-The following SQL statement deletes all rows in the cars table, without deleting the table:
+The following SQL statement deletes all rows in the bikes table, without deleting the table:
 ```
- DELETE FROM cars;
+ DELETE FROM bikes;
 ```
 
 The same would have been achieved by using the `TRUNCATE TABLE` statement:
 ```
- TRUNCATE TABLE cars; 
+ TRUNCATE TABLE bikes; 
 ```
 **NOTE:**  If you omit the WHERE clause,
 all records in the table will be deleted!.
@@ -320,12 +320,12 @@ all records in the table will be deleted!.
 - ### DROP Table
 The `DROP TABLE` statement is used to drop an existing table in a database.
 ```
- DROP TABLE cars; 
+ DROP TABLE bikes; 
 ```
 Now, if we try to display the table using `SELECT`, we'll get:
 ```
-ERROR: relation "cars" does not exist
-LINE 1: SELECT * FROM cars;
+ERROR: relation "bikes" does not exist
+LINE 1: SELECT * FROM bikes;
                       ^
 ```
 <br>
@@ -335,13 +335,13 @@ LINE 1: SELECT * FROM cars;
 - ### Equal To 
 The `=` operator is used when you want to return all records where a column is equal to a specified value:
 ```
-SELECT * FROM cars
-WHERE brand = 'Volvo'; 
+SELECT * FROM bikes
+WHERE brand = 'Royal Enfield'; 
 ```
 - ### Less Than
 The `<` operator is used when you want to return all records where a column is less than a specified value.
 ```
-SELECT * FROM cars
+SELECT * FROM bikes
 WHERE year < 1975; 
 ```
 ### Other some operators are:
